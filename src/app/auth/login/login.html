@@ -1,0 +1,12 @@
+<form (ngSubmit)="iniciarSesion()" [formGroup]="form">
+    <div id="main">
+        <h2>Turnera</h2>
+        <p>Por favor, complete el formulario para iniciar sesión.</p>
+        <span class="material-symbols-outlined">account_circle</span>
+        <input pInputText placeholder="[EMAIL_ADDRESS]" id="email" type="text" formControlName="email">
+        <span class="material-symbols-outlined">lock</span>
+        <p-password id="clave" formControlName="clave" placeholder="Clave de acceso" [feedback]="false"
+            autocomplete="off" />
+        <p-button label="Iniciar Sesión" (click)="iniciarSesion()" />
+    </div>
+</form>

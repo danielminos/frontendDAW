@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#main {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #0f172a;
+    text-align: center;
+}
+
+p {
+    margin: 0 0 1.75rem 0;
+    font-size: 0.925rem;
+    color: #64748b;
+    text-align: center;
+    line-height: 1.45;
+}
+
+.material-symbols-outlined {
+    font-size: 1.3rem;
+    color: #475569;
+    margin-top: 0.5rem;
+    margin-bottom: 0.35rem;
+    user-select: none;
+}
+
+/* Input de texto */
+input[pInputText] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Componente p-password */
+p-password {
+    width: 100%;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+:host ::ng-deep .p-password {
+    width: 100%;
+    display: block;
+}
+
+:host ::ng-deep .p-password input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+/* Botón de inicio de sesión */
+p-button {
+    width: 100%;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+:host ::ng-deep .p-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+:host ::ng-deep .p-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+:host ::ng-deep .p-button:active {
+    transform: translateY(0);
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 480px) {
+    #main {
+        padding: 2rem 1.5rem;
+        box-shadow: none;
+        border: none;
+    }
+}
