@@ -8,6 +8,13 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
+interface DtoCrearTurnoAdmin {
+    fecha: string;
+    hora: string;
+    idMedico: number;
+    idPaciente: number;
+}
+
 @Component({
     selector: 'app-administrador',
     standalone: true,
@@ -42,8 +49,9 @@ export class AdministradorComponent implements OnInit {
         });
     }
 
+    idMedicoSeleccionado: number = 1;
     guardarValorConsulta() {
-        this.adminApi.actualizarValorConsulta(this.nuevoValorConsulta).subscribe({
+        this.adminApi.actualizarValorConsultaMedico(this.idMedicoSeleccionado, this.nuevoValorConsulta).subscribe({
             next: () => {
                 this.messageService.add({
                     severity: 'success',
