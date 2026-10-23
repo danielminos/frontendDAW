@@ -1,0 +1,39 @@
+<div class="p-4">
+    <!-- Cabecera con Título y Botón de Cerrar Sesión -->
+    <div class="header-container">
+        <div>
+            <h2>Mi Portal de Paciente</h2>
+            <p>Aquí puedes visualizar tus turnos reservados y solicitar nuevos.</p>
+        </div>
+        <p-button label="Cerrar Sesión" icon="pi pi-sign-out" severity="danger" styleClass="p-button-outlined"
+            (onClick)="cerrarSesion()">
+        </p-button>
+    </div>
+
+    <!-- Componente para crear turnos con su evento para actualizar la tabla -->
+    <app-crear-turno (turnoCreado)="cargarTurnos()"></app-crear-turno>
+
+    <!-- Tabla de turnos usando PrimeNG -->
+    <p-table [value]="turnos" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Fecha y Hora</th>
+                <th>Médico</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-turno>
+            <tr>
+                <td>{{ turno.fechaHora | date:'medium' }}</td>
+                <td>{{ turno.nombreMedico }} {{ turno.apellidoMedico }}</td>
+                <td>{{ turno.estado }}</td>
+                <td>
+                    <p-button label="Cancelar" severity="danger" size="small" (onClick)="cancelarTurno(turno.idTurno)"
+                        [disabled]="turno.estado !== 'PENDIENTE'">
+                    </p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

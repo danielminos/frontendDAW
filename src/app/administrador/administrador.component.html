@@ -1,0 +1,43 @@
+<div class="p-4">
+    <!-- Cabecera con Título y Botón de Cerrar Sesión -->
+    <div class="header-container">
+        <div>
+            <h2>Panel de Administración</h2>
+            <p>Gestión global de turnos y configuración general de la clínica.</p>
+        </div>
+        <p-button label="Cerrar Sesión" icon="pi pi-sign-out" severity="danger" styleClass="p-button-outlined"
+            (onClick)="cerrarSesion()">
+        </p-button>
+    </div>
+
+    <!-- Sección de configuración de la consulta -->
+    <div class="config-card mb-4">
+        <h3>Configuración de la Consulta</h3>
+        <div class="flex gap-3 align-items-center">
+            <p-inputNumber [(ngModel)]="nuevoValorConsulta" mode="currency" currency="ARS" locale="es-AR"
+                placeholder="Nuevo valor" />
+            <p-button label="Actualizar Valor" (onClick)="guardarValorConsulta()" />
+        </div>
+    </div>
+
+    <!-- Tabla global de turnos -->
+    <h3>Listado General de Turnos</h3>
+    <p-table [value]="turnos" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Fecha y Hora</th>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Estado</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-turno>
+            <tr>
+                <td>{{ turno.fechaHora | date:'medium' }}</td>
+                <td>{{ turno.nombrePaciente }} {{ turno.apellidoPaciente }}</td>
+                <td>{{ turno.nombreMedico }} {{ turno.apellidoMedico }}</td>
+                <td>{{ turno.estado }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
