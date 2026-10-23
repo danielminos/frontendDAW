@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="guardarTurno()" class="turno-form">
+    <h3>Reservar Nuevo Turno</h3>
+
+    <div class="field-container">
+        <label for="idMedico">ID del Médico</label>
+        <input pInputText id="idMedico" type="number" formControlName="idMedico" placeholder="Ej: 1" />
+    </div>
+
+    <div class="field-container">
+        <label for="fechaHora">Fecha y Hora</label>
+        <!-- Usamos datetime-local para una selección limpia y nativa compatible -->
+        <input id="fechaHora" type="datetime-local" formControlName="fechaHora"
+            class="p-inputtext p-component w-full" />
+    </div>
+
+    <p-button label="Confirmar Reserva" type="submit" styleClass="w-full mt-3" />
+</form>

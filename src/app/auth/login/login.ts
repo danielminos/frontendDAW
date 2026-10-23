@@ -47,7 +47,6 @@ export class Login {
             next: (res) => {
                 this.authStore.guardarToken(res.accessToken);
 
-                // Decodificamos el token para leer el rol
                 const usuarioData = this.authStore.obtenerUsuarioDelToken();
                 const rol = usuarioData?.rol;
 
