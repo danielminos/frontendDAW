@@ -8,13 +8,23 @@ import { HttpClient } from '@angular/common/http';
 export class AdministradorApiClient {
     private readonly httpClient: HttpClient = inject(HttpClient);
 
-    // Listar absolutamente todos los turnos del sistema
-    listarTodosLosTurnos(): Observable<any[]> {
-        return this.httpClient.get<any[]>('/api/v1/admin/turnos');
+    // 1) POST /api/v1/administrador/turnos - Crear un turno como admin
+    crearTurnoAdmin(dto: any): Observable<any> {
+        return this.httpClient.post<any>('/api/v1/administrador/turnos', dto);
     }
 
-    // Modificar el valor/precio de la consulta médica
-    actualizarValorConsulta(nuevoValor: number): Observable<void> {
-        return this.httpClient.put<void>('/api/v1/admin/configuracion/valor-consulta', { valor: nuevoValor });
+    // 2) GET /api/v1/administrador/turnos - Listar todos los turnos
+    listarTodosLosTurnos(): Observable<any[]> {
+        return this.httpClient.get<any[]>('/api/v1/administrador/turnos');
+    }
+
+    // 3) PUT /api/v1/administrador/{id}/cancelar - Cancelar un turno por ID
+    cancelarTurnoAdmin(idTurno: number): Observable<void> {
+        return this.httpClient.put<void>(`/api/v1/administrador/${idTurno}/cancelar`, {});
+    }
+
+    // 4) PUT /api/v1/administrador/medicos/{idMedico}/valor - Actualizar valor de consulta del médico
+    actualizarValorConsultaMedico(idMedico: number, nuevoValor: number): Observable<void> {
+        return this.httpClient.put<void>(`/api/v1/administrador/medicos/${idMedico}/valor`, { valor: nuevoValor });
     }
 }
