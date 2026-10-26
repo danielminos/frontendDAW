@@ -5,7 +5,7 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CrearTurnoComponent } from './crear-turno/crear-turno.component';
-import { Router } from '@angular/router';
+import { AuthStore } from "../auth/auth-store";
 
 @Component({
     selector: 'app-pacientes',
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class PacientesComponent implements OnInit {
     private readonly pacientesApi = inject(PacientesApiClient);
-    private readonly router = inject(Router);
+    private readonly authStore = inject(AuthStore);
     private readonly messageService = inject(MessageService);
 
     turnos: any[] = [];
@@ -61,7 +61,7 @@ export class PacientesComponent implements OnInit {
     }
 
     cerrarSesion() {
-        localStorage.removeItem('token'); // O limpia el almacenamiento que utilices
-        this.router.navigate(['/login']);
+        // borra el token de session storage y redirige al login
+        this.authStore.cerrarSesion();
     }
 }

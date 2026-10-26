@@ -20,18 +20,21 @@
                 <th>Fecha y Hora</th>
                 <th>Médico</th>
                 <th>Estado</th>
+                <th>Valor</th>
                 <th>Acciones</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-turno>
             <tr>
-                <td>{{ turno.fechaHora | date:'medium' }}</td>
+                <td>{{ turno.fechaHora | date:'dd/MM/yyyy HH:mm' }}</td>
                 <td>{{ turno.nombreMedico }} {{ turno.apellidoMedico }}</td>
                 <td>{{ turno.estado }}</td>
+                <td>$ {{ turno.valorConsulta }}</td>
                 <td>
-                    <p-button label="Cancelar" severity="danger" size="small" (onClick)="cancelarTurno(turno.idTurno)"
-                        [disabled]="turno.estado !== 'PENDIENTE'">
-                    </p-button>
+                    @if (turno.estado === 'ACTIVO') {
+                        <p-button label="Cancelar" severity="danger" size="small" (onClick)="cancelarTurno(turno.idTurno)">
+                        </p-button>
+                    }
                 </td>
             </tr>
         </ng-template>
