@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthStore } from "../auth/auth-store";
 
 interface DtoCrearTurnoAdmin {
     fecha: string;
@@ -26,6 +27,7 @@ export class AdministradorComponent implements OnInit {
     private readonly adminApi = inject(AdministradorApiClient);
     private readonly router = inject(Router);
     private readonly messageService = inject(MessageService);
+    private readonly authStore = inject(AuthStore);
 
     turnos: any[] = [];
     nuevoValorConsulta: number = 0;
@@ -70,7 +72,6 @@ export class AdministradorComponent implements OnInit {
     }
 
     cerrarSesion() {
-        localStorage.removeItem('token');
-        this.router.navigate(['/login']);
+        this.authStore.cerrarSesion();
     }
 }

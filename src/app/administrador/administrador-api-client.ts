@@ -25,6 +25,6 @@ export class AdministradorApiClient {
 
     // 4) PUT /api/v1/administrador/medicos/{idMedico}/valor - Actualizar valor de consulta del médico
     actualizarValorConsultaMedico(idMedico: number, nuevoValor: number): Observable<void> {
-        return this.httpClient.put<void>(`/api/v1/administrador/medicos/${idMedico}/valor`, { valor: nuevoValor });
+        return this.httpClient.put<void>(`/api/v1/administrador/medicos/${idMedico}/valor`, { valorConsulta: nuevoValor });
     }
 }
