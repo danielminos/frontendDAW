@@ -10,8 +10,15 @@
         </p-button>
     </div>
 
+    <!-- Filtro por fecha-->
+     <div class="filtro-fecha">
+        <label for="fecha">Fecha:</label>
+        <input #inputFecha id="fecha" type="date" [value]="fecha()" (change)="cambiarFecha(inputFecha.value)">
+        <p-button label="Ver todos" severity="secondary" size="small" (onClick)="verTodos()"></p-button>
+     </div>
+
     <!-- Tabla de turnos del médico -->
-    <p-table [value]="turnos" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="turnos()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
                 <th>Fecha y Hora</th>
@@ -22,20 +29,20 @@
         </ng-template>
         <ng-template pTemplate="body" let-turno>
             <tr>
-                <td>{{ turno.fechaHora | date:'medium' }}</td>
-                <td>{{ turno.nombrePaciente }} {{ turno.apellidoPaciente }}</td>
+                <td>{{ turno.fechaHora | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ turno.nombre }} {{ turno.apellido }}</td>
                 <td>{{ turno.estado }}</td>
                 <td>
-                    <div class="flex gap-2">
-                        <p-button label="Atender" severity="success" size="small"
-                            (onClick)="cambiarEstado(turno.idTurno, 'ATENDIDO')"
-                            [disabled]="turno.estado !== 'PENDIENTE'">
-                        </p-button>
-                        <p-button label="Ausente" severity="help" size="small"
-                            (onClick)="cambiarEstado(turno.idTurno, 'AUSENTE')"
-                            [disabled]="turno.estado !== 'PENDIENTE'">
-                        </p-button>
-                    </div>
+                    @if (turno.estado === 'ACTIVO') {
+                        <div class="flex gap-2">
+                            <p-button label="Atender" severity="success" size="small"
+                                (onClick)="cambiarEstado(turno.idTurno, 'ATENDIDO')">
+                            </p-button>
+                            <p-button label="Ausente" severity="help" size="small"
+                                (onClick)="cambiarEstado(turno.idTurno, 'AUSENTE')">
+                            </p-button>
+                        </div>
+                    }
                 </td>
             </tr>
         </ng-template>

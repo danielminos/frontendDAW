@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PacientesApiClient } from './pacientes-api-client';
 import { MessageService } from 'primeng/api';
@@ -19,7 +19,7 @@ export class PacientesComponent implements OnInit {
     private readonly authStore = inject(AuthStore);
     private readonly messageService = inject(MessageService);
 
-    turnos: any[] = [];
+    turnos = signal<any[]>([]);
 
     ngOnInit() {
         this.cargarTurnos();
@@ -28,7 +28,7 @@ export class PacientesComponent implements OnInit {
     cargarTurnos() {
         this.pacientesApi.listarTurnos().subscribe({
             next: (data) => {
-                this.turnos = data;
+                this.turnos.set(data);
             },
             error: () => {
                 this.messageService.add({

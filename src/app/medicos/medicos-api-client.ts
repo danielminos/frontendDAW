@@ -16,6 +16,6 @@ export class MedicosApiClient {
 
     // Actualizar el estado del turno (ej: ATENDIDO, AUSENTE)
     actualizarEstadoTurno(idTurno: number, estado: string): Observable<void> {
-        return this.httpClient.put<void>(`/api/v1/medicos/turnos/${idTurno}/estado`, { estado });
+        return this.httpClient.patch<void>(`/api/v1/medicos/${idTurno}/estado`, { estado });
     }
 }

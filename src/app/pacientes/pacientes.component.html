@@ -14,7 +14,7 @@
     <app-crear-turno (turnoCreado)="cargarTurnos()"></app-crear-turno>
 
     <!-- Tabla de turnos usando PrimeNG -->
-    <p-table [value]="turnos" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="turnos()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
                 <th>Fecha y Hora</th>
