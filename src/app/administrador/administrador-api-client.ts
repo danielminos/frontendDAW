@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { MedicoItem } from "../pacientes/pacientes-api-client";
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,11 @@ export class AdministradorApiClient {
 
     // 4) PUT /api/v1/administrador/medicos/{idMedico}/valor - Actualizar valor de consulta del médico
     actualizarValorConsultaMedico(idMedico: number, nuevoValor: number): Observable<void> {
-        return this.httpClient.put<void>(`/api/v1/administrador/medicos/${idMedico}/valor`, { valor: nuevoValor });
+        return this.httpClient.put<void>(`/api/v1/administrador/medicos/${idMedico}/valor`, { valorConsulta: nuevoValor });
+    }
+
+    // 5) GET /api/v1/medicos - Listar medicos para elegir
+    listarMedicos(): Observable<MedicoItem[]> {
+        return this.httpClient.get<MedicoItem[]>('/api/v1/medicos');
     }
 }

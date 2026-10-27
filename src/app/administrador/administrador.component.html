@@ -14,6 +14,14 @@
     <div class="config-card mb-4">
         <h3>Configuración de la Consulta</h3>
         <div class="flex gap-3 align-items-center">
+            <select [(ngModel)]="idMedicoSeleccionado" class="p-inputtext p-componet">
+                <option [ngValue]="null" disabled>Elegí un médico</option>
+                @for (m of medicos(); track m.idMedico) {
+                    <option [ngValue]="m.idMedico">
+                        {{ m.apellido }}, {{ m.nombre }} - actual: $ {{ m.valorConsulta }}
+                    </option>
+                }
+            </select>
             <p-inputNumber [(ngModel)]="nuevoValorConsulta" mode="currency" currency="ARS" locale="es-AR"
                 placeholder="Nuevo valor" />
             <p-button label="Actualizar Valor" (onClick)="guardarValorConsulta()" />
@@ -22,13 +30,14 @@
 
     <!-- Tabla global de turnos -->
     <h3>Listado General de Turnos</h3>
-    <p-table [value]="turnos" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="turnos()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
                 <th>Fecha y Hora</th>
                 <th>Paciente</th>
                 <th>Médico</th>
                 <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-turno>
@@ -37,6 +46,13 @@
                 <td>{{ turno.nombrePaciente }} {{ turno.apellidoPaciente }}</td>
                 <td>{{ turno.nombreMedico }} {{ turno.apellidoMedico }}</td>
                 <td>{{ turno.estado }}</td>
+                <td>
+                    @if (turno.estado === 'ACTIVO') {
+                        <p-button label="Cancelar" severity="danger" size="small" (onClick)="cancelarTurno(turno.idTurno)">
+
+                        </p-button>
+                    }
+                </td>
             </tr>
         </ng-template>
     </p-table>
