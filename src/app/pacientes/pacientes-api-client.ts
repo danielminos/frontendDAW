@@ -2,6 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+export interface MedicoItem {
+    idMedico: number;
+    apellido: string;
+    nombre: string;
+    matricula: number;
+    valorConsulta: number;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -11,6 +19,11 @@ export class PacientesApiClient {
     // Listar los turnos del paciente logueado
     listarTurnos(): Observable<any[]> {
         return this.httpClient.get<any[]>('/api/v1/pacientes/turnos');
+    }
+
+    // listar los medicos para elegir en el formulario
+    listarMedicos(): Observable<MedicoItem[]> {
+        return this.httpClient.get<MedicoItem[]>('/api/v1/medicos');
     }
 
     // Crear un nuevo turno

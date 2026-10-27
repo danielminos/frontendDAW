@@ -2,8 +2,15 @@
     <h3>Reservar Nuevo Turno</h3>
 
     <div class="field-container">
-        <label for="idMedico">ID del Médico</label>
-        <input pInputText id="idMedico" type="number" formControlName="idMedico" placeholder="Ej: 1" />
+        <label for="idMedico">Médico</label>
+        <select id="idMedico" formControlName="idMedico" class="p-inputtext p-component w-full">
+            <option [ngValue]="null" disabled>Selecciona el Médico</option>
+            @for (m of medicos(); track m.idMedico) {
+                <option [ngValue]="m.idMedico">
+                    {{ m.apellido }}, {{ m.nombre }} (Mat. {{ m.matricula }}) - $ {{ m.valorConsulta }}
+                </option>
+            }
+        </select>
     </div>
 
     <div class="field-container">
