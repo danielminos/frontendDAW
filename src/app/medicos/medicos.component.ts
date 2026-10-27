@@ -1,6 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { MedicosApiClient } from './medicos-api-client';
 import { AuthStore } from '../auth/auth-store'; // Ajusta la ruta a tu AuthStore
 import { MessageService } from 'primeng/api';
@@ -17,19 +16,19 @@ import { TableModule } from 'primeng/table';
 export class MedicosComponent implements OnInit {
     private readonly medicosApi = inject(MedicosApiClient);
     private readonly authStore = inject(AuthStore);
-    private readonly router = inject(Router);
     private readonly messageService = inject(MessageService);
 
-    turnos: any[] = [];
+    turnos = signal<any[]>([]);
+    fecha = signal<string>(this.hoy());
 
     ngOnInit() {
         this.cargarTurnos();
     }
 
     cargarTurnos() {
-        this.medicosApi.listarTurnosMedico().subscribe({
+        this.medicosApi.listarTurnosMedico(this.fecha() || undefined).subscribe({
             next: (data) => {
-                this.turnos = data;
+                this.turnos.set(data);
             },
             error: () => {
                 this.messageService.add({
@@ -39,6 +38,18 @@ export class MedicosComponent implements OnInit {
                 });
             }
         });
+    }
+
+    //se ejecuta cuando el medico elige otro dia en el calednario
+    cambiarFecha(valor:string) {
+        this.fecha.set(valor);
+        this.cargarTurnos();
+    }
+
+    //quita el filtro y muestra todos los turnos sin importar fecha
+    verTodos() {
+        this.fecha.set('');
+        this.cargarTurnos();
     }
 
     cambiarEstado(idTurno: number, nuevoEstado: string) {
@@ -61,12 +72,13 @@ export class MedicosComponent implements OnInit {
         });
     }
 
-    // Método para cerrar sesión
-    cerrarSesion() {
-        // Si tu AuthStore tiene un método para limpiar el token (ej: logout o limpiarSesion), úsalo aquí.
-        // O si guardas el token en localStorage:
-        localStorage.removeItem('token'); // O el nombre que uses
+    private hoy(): string {
+        return new Date().toLocaleDateString('en-CA');
+    }
 
-        this.router.navigate(['/login']);
+    //metodo para cerrar sesion
+    cerrarSesion() {
+        //borra el token de session storage y redirige al login
+        this.authStore.cerrarSesion();
     }
 }
