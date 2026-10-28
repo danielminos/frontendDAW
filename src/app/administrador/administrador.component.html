@@ -14,7 +14,7 @@
     <div class="config-card mb-4">
         <h3>Configuración de la Consulta</h3>
         <div class="flex gap-3 align-items-center">
-            <select [(ngModel)]="idMedicoSeleccionado" class="p-inputtext p-componet">
+            <select [(ngModel)]="idMedicoSeleccionado" class="p-inputtext p-component">
                 <option [ngValue]="null" disabled>Elegí un médico</option>
                 @for (m of medicos(); track m.idMedico) {
                     <option [ngValue]="m.idMedico">
