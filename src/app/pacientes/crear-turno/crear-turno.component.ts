@@ -52,7 +52,10 @@ export class CrearTurnoComponent implements OnInit {
             return;
         }
 
-        const dto = this.form.value;
+        const dto = {
+            idMedico: this.form.value.idMedico,
+            fechaHora: new Date(this.form.value.fechaHora).toISOString()
+        }
 
         this.pacientesApi.crearTurno(dto).subscribe({
             next: () => {

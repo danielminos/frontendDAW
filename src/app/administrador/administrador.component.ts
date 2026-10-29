@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdministradorApiClient } from './administrador-api-client';
+import { AdministradorApiClient, PacienteItem } from './administrador-api-client';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -11,10 +11,9 @@ import { AuthStore } from "../auth/auth-store";
 import { MedicoItem } from "../pacientes/pacientes-api-client";
 
 interface DtoCrearTurnoAdmin {
-    fecha: string;
-    hora: string;
-    idMedico: number;
     idPaciente: number;
+    idMedico: number;
+    fechaHora: string;
 }
 
 @Component({
@@ -32,11 +31,19 @@ export class AdministradorComponent implements OnInit {
 
     turnos = signal<any[]>([]);
     medicos = signal<MedicoItem[]>([]);
+    pacientes = signal<PacienteItem[]>([]);
+
+    // campos del form de reserva
+    idPacienteReserva: number | null = null;
+    idMedicoReserva: number | null = null;
+    fechaHoraReserva = '';
+
     nuevoValorConsulta: number = 0;
 
     ngOnInit() {
         this.cargarTurnosGlobales();
         this.cargarMedicos();
+        this.cargarPacientes();
     }
 
     cargarTurnosGlobales() {
@@ -64,6 +71,60 @@ export class AdministradorComponent implements OnInit {
                     severity: 'error',
                     summary: 'Error',
                     detail: 'No se pudo cargar la lista de médicos'
+                });
+            }
+        });
+    }
+
+    cargarPacientes() {
+        this.adminApi.listarPacientes().subscribe({
+            next: (data) => {
+                this.pacientes.set(data);
+            },
+            
+            error: () => {
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Error',
+                    detail: 'No se pudo cargar la lista de pacientes'
+                });
+            }
+        });
+    }
+
+    reservarTurno() {
+        if (this.idPacienteReserva === null || this.idMedicoReserva === null || !this.fechaHoraReserva) {
+            this.messageService.add({
+                severity: 'warn',
+                summary: 'Faltan datos',
+                detail: 'Por favor, elegí paciente, médico, fecha y hora'
+            });
+            return;
+        }
+
+        const dto: DtoCrearTurnoAdmin = {
+            idPaciente: this.idPacienteReserva,
+            idMedico: this.idMedicoReserva,
+            fechaHora: new Date(this.fechaHoraReserva).toISOString()
+        };
+
+        this.adminApi.crearTurnoAdmin(dto).subscribe({
+            next: () => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Turno reservado',
+                    detail: 'El turno fue reservado con éxito'
+                });
+                this.idPacienteReserva = null;
+                this.idMedicoReserva = null;
+                this.fechaHoraReserva= '';
+                this.cargarTurnosGlobales();
+            },
+            error: (err) => {
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Error al reservar',
+                    detail: err.error?.message || 'No se pudo reservar el turno'
                 });
             }
         });

@@ -3,6 +3,13 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MedicoItem } from "../pacientes/pacientes-api-client";
 
+export interface PacienteItem {
+    idPaciente: number;
+    documento: string;
+    apellido: string;
+    nombre: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -32,5 +39,10 @@ export class AdministradorApiClient {
     // 5) GET /api/v1/medicos - Listar medicos para elegir
     listarMedicos(): Observable<MedicoItem[]> {
         return this.httpClient.get<MedicoItem[]>('/api/v1/medicos');
+    }
+
+    // 6) GET /api/v1/administrador/pacientes - Listar pacientes activos
+    listarPacientes(): Observable<PacienteItem[]> {
+        return this.httpClient.get<PacienteItem[]>('/api/v1/administrador/pacientes');
     }
 }

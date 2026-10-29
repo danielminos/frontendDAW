@@ -14,7 +14,7 @@
     <div class="config-card mb-4">
         <h3>Configuración de la Consulta</h3>
         <div class="flex gap-3 align-items-center">
-            <select [(ngModel)]="idMedicoSeleccionado" class="p-inputtext p-componet">
+            <select [(ngModel)]="idMedicoSeleccionado" class="p-inputtext p-component">
                 <option [ngValue]="null" disabled>Elegí un médico</option>
                 @for (m of medicos(); track m.idMedico) {
                     <option [ngValue]="m.idMedico">
@@ -25,6 +25,27 @@
             <p-inputNumber [(ngModel)]="nuevoValorConsulta" mode="currency" currency="ARS" locale="es-AR"
                 placeholder="Nuevo valor" />
             <p-button label="Actualizar Valor" (onClick)="guardarValorConsulta()" />
+        </div>
+    </div>
+
+    <!-- Seccion para reservar un turno a nombre de un paciente -->
+    <div class="config-card mb-4">
+        <h3>Reservar Turno para un Paciente</h3>
+        <div class="flex gap-3 align-items-center">
+            <select [(ngModel)]="idPacienteReserva" class="p-inputtext p-component">
+                <option [ngValue]="null" disabled>Elegí un paciente</option>
+                @for (p of pacientes(); track p.idPaciente) {
+                    <option [ngValue]="p.idPaciente">{{ p.apellido }}, {{ p.nombre }} (DNI {{ p.documento }})</option>
+                }
+            </select>
+            <select [(ngModel)]="idMedicoReserva" class="p-inputtext p-component">
+                <option [ngValue]="null" disabled>Elegí un médico</option>
+                @for (m of medicos(); track m.idMedico) {
+                    <option [ngValue]="m.idMedico">{{ m.apellido }}, {{ m.nombre }}</option>
+                }
+            </select>
+            <input type="datetime-local" [(ngModel)]="fechaHoraReserva" class="p-inputtext p-component" />
+            <p-button label="Reservar" (onClick)="reservarTurno()" />
         </div>
     </div>
 
