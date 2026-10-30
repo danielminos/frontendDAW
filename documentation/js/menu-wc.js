@@ -43,6 +43,11 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </a>
                             </li>
                                 <li class="link">
+                                    <a href="architecture.html" data-type="chapter-link">
+                                        <span class="icon ion-ios-git-branch"></span>Architecture
+                                    </a>
+                                </li>
+                                <li class="link">
                                     <a href="dependencies.html" data-type="chapter-link">
                                         <span class="icon ion-ios-list"></span>Dependencies
                                     </a>
@@ -64,7 +69,79 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="components-links"' : 'id="xs-components-links"' }>
                             <li class="link">
+                                <a href="components/AdministradorComponent.html" data-type="entity-link" >AdministradorComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/App.html" data-type="entity-link" >App</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/CrearTurnoComponent.html" data-type="entity-link" >CrearTurnoComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/Login.html" data-type="entity-link" >Login</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/MedicosComponent.html" data-type="entity-link" >MedicosComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/PacientesComponent.html" data-type="entity-link" >PacientesComponent</a>
+                            </li>
+                        </ul>
+                    </li>
+                        <li class="chapter">
+                            <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#injectables-links"' :
+                                'data-bs-target="#xs-injectables-links"' }>
+                                <span class="icon ion-md-arrow-round-down"></span>
+                                <span>Injectables</span>
+                                <span class="icon ion-ios-arrow-down"></span>
+                            </div>
+                            <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
+                                <li class="link">
+                                    <a href="injectables/AdministradorApiClient.html" data-type="entity-link" >AdministradorApiClient</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AuthStore.html" data-type="entity-link" >AuthStore</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/LoginApiClient.html" data-type="entity-link" >LoginApiClient</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MedicosApiClient.html" data-type="entity-link" >MedicosApiClient</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/PacientesApiClient.html" data-type="entity-link" >PacientesApiClient</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#guards-links"' :
+                            'data-bs-target="#xs-guards-links"' }>
+                            <span class="icon ion-ios-lock"></span>
+                            <span>Guards</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="guards-links"' : 'id="xs-guards-links"' }>
+                            <li class="link">
+                                <a href="guards/roleGuard.html" data-type="entity-link" >roleGuard</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#interfaces-links"' :
+                            'data-bs-target="#xs-interfaces-links"' }>
+                            <span class="icon ion-md-information-circle-outline"></span>
+                            <span>Interfaces</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
+                            <li class="link">
+                                <a href="interfaces/DtoCrearTurnoAdmin.html" data-type="entity-link" >DtoCrearTurnoAdmin</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/MedicoItem.html" data-type="entity-link" >MedicoItem</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/PacienteItem.html" data-type="entity-link" >PacienteItem</a>
                             </li>
                         </ul>
                     </li>
@@ -76,6 +153,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
+                            <li class="link">
+                                <a href="miscellaneous/functions.html" data-type="entity-link">Functions</a>
+                            </li>
                             <li class="link">
                                 <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
                             </li>
