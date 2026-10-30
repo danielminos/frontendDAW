@@ -178,7 +178,8 @@
       theme: {
         preset: Aura
       }
-    })
+    }),
+    provideHttpClient(withInterceptors([authInterceptor]))
   ]
 }</code>
                     </td>
@@ -209,7 +210,37 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
+                        <i>Default value : </i><code>[
+    { path: &#x27;login&#x27;, component: Login },
+
+    // Ruta protegida para Administradores
+    {
+        path: &#x27;administrador/turnos&#x27;,
+        loadComponent: () &#x3D;&gt; &quot;import(&#x27;./administrador/administrador.component&#x27;).then(m &#x3D;&gt; m.AdministradorComponent)&quot;,
+        canActivate: [roleGuard],
+        data: { expectedRole: &#x27;ADMINISTRADOR&#x27; }
+    },
+
+    // Ruta protegida para Médicos
+    {
+        path: &#x27;medicos/turnos&#x27;,
+        loadComponent: () &#x3D;&gt; &quot;import(&#x27;./medicos/medicos.component&#x27;).then(m &#x3D;&gt; m.MedicosComponent)&quot;,
+        canActivate: [roleGuard],
+        data: { expectedRole: &#x27;MEDICO&#x27; }
+    },
+
+    // Ruta protegida para Pacientes
+    {
+        path: &#x27;pacientes/turnos&#x27;,
+        loadComponent: () &#x3D;&gt; &quot;import(&#x27;./pacientes/pacientes.component&#x27;).then(m &#x3D;&gt; m.PacientesComponent)&quot;,
+        canActivate: [roleGuard],
+        data: { expectedRole: &#x27;PACIENTE&#x27; }
+    },
+
+    // Ruta por defecto o comodín
+    { path: &#x27;&#x27;, redirectTo: &#x27;login&#x27;, pathMatch: &#x27;full&#x27; },
+    { path: &#x27;**&#x27;, redirectTo: &#x27;login&#x27; }
+]</code>
                     </td>
                 </tr>
 

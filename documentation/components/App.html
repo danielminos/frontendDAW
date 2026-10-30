@@ -173,6 +173,12 @@
 
 
 
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>MessageService</code>
+                </td>
+            </tr>
 
 
             <tr>
@@ -189,6 +195,8 @@
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                         <div>        <code><a href="https://angular.dev/api/router/RouterOutlet" target="_blank" >RouterOutlet</a></code>
+</div>
+                        <div>    <code>ToastModule</code>
 </div>
                 </td>
             </tr>
@@ -235,6 +243,12 @@
                         <ul class="list-unstyled relationships-list">
                                 <li>
                                             <code><a href="https://angular.dev/api/router/RouterOutlet" target="_blank" >RouterOutlet</a></code>
+                                </li>
+                                <li>
+                                        <code>ToastModule</code>
+                                </li>
+                                <li>
+                                        <code>MessageService</code>
                                 </li>
                         </ul>
                 </div>
@@ -308,7 +322,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/app.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/app.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -323,12 +337,15 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, signal } from &#x27;@angular/core&#x27;;
 import { RouterOutlet } from &#x27;@angular/router&#x27;;
+import { ToastModule } from &#x27;primeng/toast&#x27;;
+import { MessageService } from &#x27;primeng/api&#x27;;
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ToastModule],
   selector: &#x27;app-root&#x27;,
   styleUrl: &#x27;./app.css&#x27;,
   templateUrl: &#x27;./app.html&#x27;,
+  providers: [MessageService]
 })
 export class App {
   protected readonly title &#x3D; signal(&#x27;frontend&#x27;);
@@ -338,6 +355,7 @@ export class App {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;router-outlet /&gt;
+&lt;p-toast /&gt;
 </code></pre>
     </div>
 
@@ -373,8 +391,8 @@ export class App {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><router-outlet /></div>'
-    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'}];
+        var COMPONENT_TEMPLATE = '<div><router-outlet /><p-toast /></div>'
+    var COMPONENTS = [{'name': 'AdministradorComponent', 'selector': 'app-administrador'},{'name': 'App', 'selector': 'app-root'},{'name': 'CrearTurnoComponent', 'selector': 'app-crear-turno'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MedicosComponent', 'selector': 'app-medicos'},{'name': 'PacientesComponent', 'selector': 'app-pacientes'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'App'};
 </script>
