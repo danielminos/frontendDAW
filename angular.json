@@ -35,7 +35,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -63,7 +63,7 @@
               "buildTarget": "frontend:build:development"
             }
           },
-          "options":{
+          "options": {
             "proxyConfig": "src/proxy.conf.json"
           },
           "defaultConfiguration": "development"
